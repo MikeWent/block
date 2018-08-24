@@ -770,8 +770,8 @@ xcb_pixmap_t do_cairo_draw(int is_checking, struct arguments *arguments) {
         oy = xr_resolutions[scr].y;
 
         if (arguments->font_size) {
-            x = (double)((arguments->X_set) ? (arguments->X >= 0) ? (arguments->X) : (width - extents.width - arguments->X) : (width / 2) - (extents.width / 2));  // - extents.x_bearing;
-            y = (double)((arguments->Y_set) ? (arguments->Y >= 0) ? (arguments->Y) : (height - extents.height - arguments->Y) : ((height / 2) - (extents.height / 2)));  // - extents.y_bearing;
+            x = (double)((arguments->X_set) ? (arguments->X >= 0) ? (arguments->X) : (width - extents.width - arguments->X) : (width / 2) - (extents.width / 2)) - extents.x_bearing;
+            y = (double)((arguments->Y_set) ? (arguments->Y >= 0) ? (arguments->Y) : (height - extents.height - arguments->Y) : ((height / 2) - (extents.height / 2))) - extents.y_bearing;
 
             cairo_move_to(cr, x + ox, y + oy);
             cairo_set_source_rgba(cr, arguments->clk.r, arguments->clk.g, arguments->clk.b, arguments->clk.a);
