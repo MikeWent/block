@@ -3,6 +3,7 @@
 CC=gcc
 CFLAGS=-Wall -I. -lev -lpam $(shell pkg-config --cflags --libs cairo xcb xcb-image \
 					       	  xcb-xkb xkbcommon xkbcommon-x11 xcb-icccm xcb-randr)
+INSTALL_PROGRAM=install
 DEPS =
 
 %.o: %.c $(DEPS)
@@ -12,12 +13,12 @@ clean:
 	rm -f main.o randr.o block
 
 install:
-	install -m 755 block /usr/local/bin
-	install -m 644 pam/block /etc/pam.d/
+	$(INSTALL_PROGRAM) -m 755 block $(DESTDIR)/usr/local/bin
+	$(INSTALL_PROGRAM) -m 644 pam/block $(DESTDIR)/etc/pam.d/
 
 uninstall:
-	rm /usr/local/bin/block
-	rm /etc/pam.d/block
+	rm $(DESTDIR)/usr/local/bin/block
+	rm $(DESTDIR)/etc/pam.d/block
 
 all: main.o randr.o
 	 $(CC) -o block $(CFLAGS) main.o randr.o
