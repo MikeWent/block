@@ -13,8 +13,8 @@ clean:
 	rm -f main.o randr.o block
 
 install:
-	$(INSTALL_PROGRAM) -D -m 755 block $(DESTDIR)/usr/local/bin
-	$(INSTALL_PROGRAM) -D -m 644 pam/block $(DESTDIR)/etc/pam.d/
+	$(INSTALL_PROGRAM) -D -m 755 block $(DESTDIR)/usr/local/bin/block
+	$(INSTALL_PROGRAM) -D -m 644 pam/block $(DESTDIR)/etc/pam.d/block
 
 uninstall:
 	rm $(DESTDIR)/usr/local/bin/block
