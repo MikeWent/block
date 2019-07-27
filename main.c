@@ -245,7 +245,7 @@ void finish_input(struct arguments *arguments) {
     password_str[input_position] = '\0';
 
     render_cairo(1, arguments);
-    if (authenticate_system(username, password_str, 1)) exit(0);
+    if (authenticate_system(username, password_str, 0)) exit(0);
 
     clear_input();
 }
