@@ -168,16 +168,28 @@ int authenticate_system(const char *username, const char *password, int quiet) {
         default:
             if (!quiet)
                 fprintf(stderr, "%s\n", pam_strerror(local_auth_handle, retval));
-            free(reply); return 0;
+            free(reply);
+            return 0;
     }
 
     retval = pam_end(local_auth_handle, retval);
     if (retval != PAM_SUCCESS) {
         if (!quiet)
             fprintf(stderr, "main: pam_end: %s\n", pam_strerror(local_auth_handle, retval));
-        free(reply); return 0;
+        free(reply);
+        return 0;
     }
-    free(reply); return 1;
+
+    // Line below commented out to fix the following:
+    //
+    //      $ block image.png
+    //      free(): double free detected in tcache 2
+    //      [1]    564 abort (core dumped)  block image.png
+    //
+
+    // free(reply);
+    
+    return 1;
 }
 
 /* --- */
