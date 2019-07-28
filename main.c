@@ -164,6 +164,7 @@ int authenticate_system(const char *username, const char *password, int quiet) {
 
     switch (retval) {
         case PAM_SUCCESS:
+            printf("Authentication success\n");
             break;
         default:
             if (!quiet)
